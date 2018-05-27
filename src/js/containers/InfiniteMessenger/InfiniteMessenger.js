@@ -1,6 +1,7 @@
 import { getPayload } from '../../components/API/Payload';
 import { isPresent } from '../../components/ErrorHandlers/ErrorHandlers';
 import messageCollection from '../../components/Messages/Messages';
+import watchWindowBottom from '../../components/EventScroll/EventScroll';
 
 class InfiniteMessenger {
     constructor(config){
@@ -27,6 +28,7 @@ class InfiniteMessenger {
             .then(this.setMessages.bind(this))
             .then(this.render.bind(this));
 
+        this.addNewPage = this.addNewPage.bind(this);
     }
 
     // Sets state of container
@@ -55,6 +57,18 @@ class InfiniteMessenger {
         }
     }
 
+    addNewPage(){
+        if(!this.state.loading){
+            this.setState({ loading : true });
+            
+            this.getNextPage(this.state.pageToken)
+                .then(response => {
+                    this.config.root.appendChild(this.addMessageBlock(response));
+                    this.setState({ loading : false });
+                });
+        }
+    }
+
     // Set state for messages UI
     buildMessageUI(messages) {
         this.setState({ messagesUI : [...messageCollection(messages)] })
@@ -78,7 +92,7 @@ class InfiniteMessenger {
                 .then(response => this.config.root.appendChild(this.addMessageBlock(response)));
         })
         this.config.root.appendChild(this.addMessageBlock(this.state.messages));
-        ;
+        watchWindowBottom(this.addNewPage);
     }
 }
 
