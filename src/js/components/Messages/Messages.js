@@ -6,10 +6,10 @@ const messageCollection = messages => {
         return (
             `<article class="message" data-messageid="${ message.id }">
                 ${ messageHead({ 
-                    name: message.author.name, 
-                    photoUrl: message.author.photoUrl, 
-                    updated: message.updated 
-                }) }
+                name: message.author.name, 
+                photoUrl: message.author.photoUrl, 
+                updated: message.updated 
+            }) }
                 ${ messageBody(message.content) }
             </article>`
         )

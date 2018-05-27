@@ -1,0 +1,46 @@
+.message {
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 3px;
+    background-color: $color-white;
+    box-shadow: $box-shadow;
+
+    cursor: -webkit-grab;
+
+    &__header {
+        display: flex;
+        align-items: center;
+    }
+
+    &__author-avatar {
+        position: relative;
+        width: 15%;
+        border: solid 1px $color-light-grey;
+        border-radius: 50%;
+        overflow: hidden;
+
+        .message__image {
+            transform: scale(1.15);
+        }
+    }
+
+    &__author {
+        padding-left: 2rem;
+    }
+
+    &__author-name {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    &__post-time {
+        font-size: 1.4rem;
+        margin-top: .5rem;
+    }
+
+    &__body {
+        padding-top: 1.5rem;
+        font-size: 1.4rem;
+    }
+
+}

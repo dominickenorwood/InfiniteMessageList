@@ -23,7 +23,7 @@ const watchWindowBottom = dispatch => {
             // Check the distance of the HTML node relative to the bottom of the window
             if(windowRelativeBottom / 2 > windowElementClientHeight) {
                 return;
-            };
+            }
     
             console.log('[Message Check]');
             return dispatch();

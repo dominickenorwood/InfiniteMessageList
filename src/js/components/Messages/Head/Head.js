@@ -1,7 +1,13 @@
 import * as keys from '../../API/Keys';
 
 const messageHead = author => {
-    const updated = author.updated;
+    // https://stackoverflow.com/questions/12498619/convert-iso-8601-time-date-into-plain-english
+    // http://danhounshell.com/blog/how-to-convert-a-10-digit-timestamp-json-to-a-javascript-date/
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemer', 'December'];
+    //const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const date = new Date(author.updated);
+    const updated = `${months[date.getMonth() - 1]}, ${date.getMonth()} ${date.getFullYear()}`;
+    //const updated = `${date.getDate()} / ${date.getMonth()} / ${date.getFullYear()}`;
 
     return (
         `<header class="message__header">

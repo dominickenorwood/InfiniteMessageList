@@ -78,19 +78,14 @@ class InfiniteMessenger {
     // Render block in viewport
     addMessageBlock(messages) {
         const section = document.createElement('section');
-        section.setAttribute('class', 'message__block');
+        section.setAttribute('class', 'app-messenger__block');
         section.innerHTML = this.buildMessageUI(messages);
 
         return section;
     }
 
     render() {
-        const button = document.getElementById('get-more');
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            this.getNextPage(this.state.pageToken)
-                .then(response => this.config.root.appendChild(this.addMessageBlock(response)));
-        })
+        
         this.config.root.appendChild(this.addMessageBlock(this.state.messages));
         watchWindowBottom(this.addNewPage);
     }
