@@ -5,11 +5,9 @@ import watchWindowBottom from '../../components/EventScroll/EventScroll';
 import Touch from '../Touch/Touch';
 
 class InfiniteMessenger {
-    constructor(config){
-        // Set config values
+    constructor(config) {
         this.config = config;
 
-        // Set initial state
         this.state = {
             messages: [],
             messagesUI: [],
@@ -17,7 +15,6 @@ class InfiniteMessenger {
             loading: true
         }
 
-        // Check if config is set up properly
         isPresent([
             { name: '[Config Endpoint]', property: this.config.endpoint },
             { name: '[Config Limit]', property: this.config.limit },
@@ -25,7 +22,6 @@ class InfiniteMessenger {
             { name: '[Config Loader]', property: this.config.loader }
         ])
 
-        // Get, set and render first page of messages
         getPayload(`${this.config.endpoint}?limit=${this.config.limit}`)
             .then(response => {
                 this.setMessages(response);
@@ -37,13 +33,11 @@ class InfiniteMessenger {
         this.addNewPage = this.addNewPage.bind(this);
     }
 
-    // Sets state of container
     setState(newState) {
         this.state = { ...this.state, ...newState };
         //console.log('[New State]', this.state);
     }
 
-    // Set state messages
     setMessages(data) {
         this.setState({ 
             messages: [...data.messages],
@@ -51,7 +45,6 @@ class InfiniteMessenger {
         })
     }
 
-    // Get next page of messages and set state
     async getNextPage(token) {
         try {
             const payload = await getPayload(`${this.config.endpoint}?limit=${this.config.limit}&pageToken="${token}"`)
@@ -59,7 +52,8 @@ class InfiniteMessenger {
 
             return this.state.messages;
         } catch(error) {
-            return error;
+            console.log('getNextPage() Error: ', error);
+            return [];
         }
     }
 
@@ -77,13 +71,11 @@ class InfiniteMessenger {
         }
     }
 
-    // Set state for messages UI
     buildMessageUI(messages) {
         this.setState({ messagesUI : [...messageCollection(messages)] })
         return this.state.messagesUI.join('');
     }
 
-    // Render block in viewport
     addMessageBlock(messages) {
         const section = document.createElement('section');
         section.setAttribute('class', 'app-messenger__block');
@@ -105,8 +97,6 @@ class InfiniteMessenger {
             root: this.config.root,
             selector: '.message'
         });
-
-        console.log(touch);
         
         this.config.root.appendChild(this.addMessageBlock(this.state.messages));
         watchWindowBottom(this.addNewPage);

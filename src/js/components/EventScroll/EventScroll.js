@@ -13,7 +13,6 @@ const watchWindowBottom = dispatch => {
             windowRelativeBottom = Math.floor(document.documentElement.getBoundingClientRect().bottom);
             windowElementClientHeight = Math.floor(document.documentElement.clientHeight);
             
-            // Check the distance of the HTML node relative to the bottom of the window
             if(windowRelativeBottom / 2 > windowElementClientHeight) {
                 return;
             }

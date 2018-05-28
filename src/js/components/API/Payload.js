@@ -5,7 +5,8 @@ export const getPayload = async (url) => {
         const payload = await fetchData(url);
         return payload;
 
-    } catch(error) { 
-        return error;
+    } catch(error) {
+        console.log('getPayload()', error);
+        return {};
     }
 }

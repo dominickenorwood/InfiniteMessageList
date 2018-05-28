@@ -11,7 +11,6 @@ class Touch {
             targetElement: null
         }
 
-        // Check if config is set up properly
         isPresent([
             { name: '[Config Root]', property: this.config.root },
             { name: '[Config Selector]', property: this.config.selector }
@@ -25,7 +24,6 @@ class Touch {
         this.render();
     }
 
-    // Sets state of container
     setState(newState) {
         this.state = { ...this.state, ...newState };
         //console.log('[New State]', this.state);
