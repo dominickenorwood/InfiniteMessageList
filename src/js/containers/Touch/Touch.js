@@ -37,15 +37,46 @@ class Touch {
     }
 
     move(event) {
-
+        const targetElement = getClosest(event.target, this.config.selector);
+        if(targetElement) {
+            if(Math.floor(event.touches[0].pageX) > this.state.touchStart){
+                this.setState({ move: this.state.move += 10 });
+            } else {
+                this.setState({ move: this.state.move -= 10 });
+            }
+            targetElement.style.transform = `translate3d(${this.state.elementX + this.state.move}px,0,0)`;
+        }
     }
 
     end(event) {
+        const targetElement = getClosest(event.target, this.config.selector);
+        if(targetElement) {
+            let removeElement = false;
+            targetElement.classList.remove('u-touched');
 
+            if(Math.floor(targetElement.getBoundingClientRect().left) > 80) {
+                if(!removeElement){
+                    removeElement = true;
+                    targetElement.style.transform = `translate3d(100vw,0,0)`;
+                    targetElement.style.height = `${targetElement.offsetHeight}px`
+                    targetElement.addEventListener('transitionend', (event) => {
+                        if(event.propertyName === 'transform'){
+                            targetElement.style.height = '0';
+                            targetElement.style.margin = '0';
+                            targetElement.style.padding = '0';
+                        }
+                    });
+                }
+            } else {
+                targetElement.style.transform = `translate3d(0,0,0)`;
+            }
+        }
     }
 
     render() {
         this.config.root.addEventListener('touchstart', this.start);
+        this.config.root.addEventListener('touchmove', this.move);
+        this.config.root.addEventListener('touchend', this.end);
     }
 }
 
