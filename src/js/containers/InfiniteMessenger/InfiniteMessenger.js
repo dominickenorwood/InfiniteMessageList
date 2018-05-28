@@ -2,6 +2,7 @@ import { getPayload } from '../../components/API/Payload';
 import { isPresent } from '../../components/ErrorHandlers/ErrorHandlers';
 import messageCollection from '../../components/Messages/Messages';
 import watchWindowBottom from '../../components/EventScroll/EventScroll';
+import Touch from '../Touch/Touch';
 
 class InfiniteMessenger {
     constructor(config){
@@ -85,6 +86,10 @@ class InfiniteMessenger {
     }
 
     render() {
+        const touch = new Touch({
+            root: this.config.root,
+            selector: '.message'
+        });
         
         this.config.root.appendChild(this.addMessageBlock(this.state.messages));
         watchWindowBottom(this.addNewPage);

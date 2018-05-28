@@ -1,34 +1,54 @@
-import '../sass/index.scss';
+import { getClosest } from '../../components/Helpers/Helpers';
+import { isPresent } from '../../components/ErrorHandlers/ErrorHandlers';
 
-import InfiniteMessenger from './containers/InfiniteMessenger/InfiniteMessenger';
-import * as keys from './components/API/Keys';
+class Touch {
+    constructor(config) {
+        this.config = config;
 
-// Set up new infinite messenger with config
-const messenger = new InfiniteMessenger({
-    endpoint: keys.MESSAGES_ENDPOINT,
-    limit: 20,
-    root: document.getElementById('app-messenger')
-});
+        this.state = {
+            move : 0,
+            elementX: 0,
+            touchStart: 0
+        }
 
-console.log(messenger);
+        this.start = this.start.bind(this);
+        this.move = this.move.bind(this);
+        this.end = this.end.bind(this);
 
-// const dock = document.createElement('div');
-// dock.setAttribute('id', 'dock');
-// const body = document.getElementsByTagName('body');
-// body[0].appendChild(dock);
+        this.render();
+    }
 
-// https://gomakethings.com/how-to-get-the-closest-parent-element-with-a-matching-selector-using-vanilla-javascript/
-// const getClosest = (elem, selector) => {
+    // Sets state of container
+    setState(newState) {
+        this.state = { ...this.state, ...newState };
+        console.log('[New State]', this.state);
+    }
 
-//     // Get the closest matching element
-//     for( ; elem && elem !== document; elem = elem.parentNode){ 
+    start(event) {
+        const targetElement = getClosest(event.target, this.config.selector);
+        if(targetElement) {
+            this.setState({ 
+                move: 0, 
+                elementX: targetElement.getBoundingClientRect().left,
+                touchStart:  Math.floor(event.touches[0].pageX)
+            });
+            targetElement.classList.add('u-touched');
+        }
+    }
 
-//         if(elem.matches( selector )) {
-//             return elem;
-//         }
-//     }
-//     return null;
-// }
+    move(event) {
+
+    }
+
+    end(event) {
+
+    }
+
+    render() {
+        this.config.root.addEventListener('touchstart', this.start);
+    }
+}
+
 
 // let move = 0;
 // let articleX = 0;
@@ -90,3 +110,4 @@ console.log(messenger);
 //     }
 // })
 
+export default Touch;

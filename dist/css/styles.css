@@ -1,0 +1,85 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  font-weight: inherit;
+  line-height: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #eee;
+  font-weight: normal;
+  line-height: 1.7; }
+
+img {
+  max-width: 100%; }
+
+#dock {
+  position: fixed;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 14px; }
+
+body {
+  font-family: 'Lato', 'Arial', sans-serif; }
+
+.app-messenger {
+  overflow: hidden; }
+  .app-messenger__block {
+    padding: 1rem 2rem; }
+
+.message {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 3px;
+  background-color: #fff;
+  -webkit-box-shadow: 2px 2px 15px -6px #3e3e3e;
+          box-shadow: 2px 2px 15px -6px #3e3e3e;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out; }
+  .message.u-touched {
+    -webkit-box-shadow: 2px 2px 25px -6px #3e3e3e;
+            box-shadow: 2px 2px 25px -6px #3e3e3e;
+    cursor: -webkit-grabbing; }
+  .message > * {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden; }
+  .message__header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .message__author-avatar {
+    position: relative;
+    width: 15%;
+    border: solid 1px #eee;
+    border-radius: 50%;
+    overflow: hidden; }
+    .message__author-avatar .message__image {
+      -webkit-transform: scale(1.15);
+              transform: scale(1.15); }
+  .message__author {
+    padding-left: 2rem; }
+  .message__author-name {
+    font-size: 2rem;
+    font-weight: 600; }
+  .message__post-time {
+    font-size: 1.4rem;
+    margin-top: .5rem; }
+  .message__body {
+    padding-top: 1.5rem;
+    font-size: 1.4rem; }
