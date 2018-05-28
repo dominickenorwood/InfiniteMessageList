@@ -12,6 +12,12 @@ class Touch {
             targetElement: null
         }
 
+        // Check if config is set up properly
+        isPresent([
+            { name: '[Config Root]', property: this.config.root },
+            { name: '[Config Selector]', property: this.config.selector }
+        ])
+
         this.start = this.start.bind(this);
         this.move = this.move.bind(this);
         this.end = this.end.bind(this);
@@ -30,32 +36,37 @@ class Touch {
         this.setState({ targetElement : getClosest(event.target, this.config.selector) });
 
         if(this.state.targetElement) {
+            
             this.setState({ 
                 move: 0, 
                 elementX: this.state.targetElement.getBoundingClientRect().left,
                 touchStart:  Math.floor(event.touches[0].pageX)
             });
             this.state.targetElement.classList.add('u-touched');
+
+            //const elementWidth = Math.floor(this.state.targetElement.getBoundingClientRect().right - this.state.targetElement.getBoundingClientRect().left);
+            const elementTouchOrigin = this.state.touchStart - this.state.elementX;
+            //console.log('Element Width: ', elementWidth);
+            console.log('Element Touch Origin', elementTouchOrigin);
+            console.log('Element Right', Math.floor(this.state.targetElement.getBoundingClientRect().right))
         }
     }
 
     move(event) {
         if(this.state.targetElement) {
-            if(Math.floor(event.touches[0].pageX) > this.state.touchStart){
-                this.setState({ move: this.state.move += 10 });
-            } else {
-                this.setState({ move: this.state.move -= 10 });
-            }
-            this.state.targetElement.style.transform = `translate3d(${this.state.elementX + this.state.move}px,0,0)`;
+            const slide = Math.floor(event.touches[0].pageX) - this.state.touchStart;
+            this.state.targetElement.style.transform = `translate3d(${slide + 10}px,0,0)`;
         }
     }
 
     end(event) {
         if(this.state.targetElement) {
+            const elementLeft = Math.floor(this.state.targetElement.getBoundingClientRect().left);
+            const elementRight = Math.floor(this.state.targetElement.getBoundingClientRect().right)
             let removeElement = false;
             this.state.targetElement.classList.remove('u-touched');
 
-            if(Math.floor(this.state.targetElement.getBoundingClientRect().left) > 80) {
+            if(elementLeft > Math.floor(elementRight / 4)) {
                 if(!removeElement){
                     removeElement = true;
                     this.state.targetElement.style.transform = `translate3d(100vw,0,0)`;

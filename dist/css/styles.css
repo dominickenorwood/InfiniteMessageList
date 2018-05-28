@@ -55,7 +55,11 @@ body {
     cursor: -webkit-grabbing; }
   .message > * {
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; }
+            backface-visibility: hidden;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
   .message__header {
     display: -webkit-box;
     display: -ms-flexbox;
