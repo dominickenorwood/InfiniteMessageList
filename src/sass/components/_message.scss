@@ -1,15 +1,21 @@
 .message {
     padding: 2rem;
-    margin: 2rem 0;
+    margin-bottom: 2rem;
     border-radius: 3px;
     background-color: $color-white;
     box-shadow: $box-shadow;
+    overflow: hidden;
 
     cursor: -webkit-grab;
     transition: all .3s ease-out;
 
     &.u-touched {
         box-shadow: $box-shadow-press;
+        cursor: -webkit-grabbing;
+    }
+
+    & > * {
+        backface-visibility: hidden;
     }
     
 
