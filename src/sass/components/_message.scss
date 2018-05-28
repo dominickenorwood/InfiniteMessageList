@@ -6,6 +6,12 @@
     box-shadow: $box-shadow;
 
     cursor: -webkit-grab;
+    transition: all .3s ease-out;
+
+    &.u-touched {
+        box-shadow: $box-shadow-press;
+    }
+    
 
     &__header {
         display: flex;
