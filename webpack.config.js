@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    watch: true,
+    watch: false,
     devtool: 'cheap-module-eval-source-map',
     entry: {
         bundle: ['babel-polyfill', './src/js/index.js']

@@ -1,0 +1,39 @@
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5.5rem;
+    color: $color-white;
+    background-color: $color-purple;
+    z-index: 1000;
+
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .35);
+
+    display: flex;
+    align-items: center;
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 400;
+        padding-left: 3.5rem;
+    }
+
+    &__navigation {
+        padding-left: 2rem;
+    }
+
+    &__hamburger {
+        display: block;
+        width: 2rem;
+    }
+    &__slice {
+        display: block;
+        height: 3px;
+        background-color: $color-white;
+
+        &:not(:last-child) {
+            margin-bottom: 3.5px;
+        }
+    }
+}

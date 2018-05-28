@@ -6,5 +6,9 @@
 @import "base/animations";
 @import "base/typography";
 
+@import "components/header";
 @import "components/app-messenger";
 @import "components/message";
+@import "components/footer";
+
+@import "vendors/css-loaders";

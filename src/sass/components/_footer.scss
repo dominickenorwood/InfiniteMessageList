@@ -1,0 +1,11 @@
+.app-footer {
+    margin: 2rem 0;
+    height: 6rem;
+    opacity: 1;
+    transition: all .3s;
+    overflow: hidden;
+
+    &.u-disappear {
+        opacity: 0;
+    }
+}

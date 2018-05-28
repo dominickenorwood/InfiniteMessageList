@@ -6,7 +6,6 @@ class Touch {
         this.config = config;
 
         this.state = {
-            move : 0,
             elementX: 0,
             touchStart: 0,
             targetElement: null
@@ -29,7 +28,7 @@ class Touch {
     // Sets state of container
     setState(newState) {
         this.state = { ...this.state, ...newState };
-        console.log('[New State]', this.state);
+        //console.log('[New State]', this.state);
     }
 
     start(event) {
@@ -43,12 +42,6 @@ class Touch {
                 touchStart:  Math.floor(event.touches[0].pageX)
             });
             this.state.targetElement.classList.add('u-touched');
-
-            //const elementWidth = Math.floor(this.state.targetElement.getBoundingClientRect().right - this.state.targetElement.getBoundingClientRect().left);
-            const elementTouchOrigin = this.state.touchStart - this.state.elementX;
-            //console.log('Element Width: ', elementWidth);
-            console.log('Element Touch Origin', elementTouchOrigin);
-            console.log('Element Right', Math.floor(this.state.targetElement.getBoundingClientRect().right))
         }
     }
 

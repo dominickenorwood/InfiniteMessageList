@@ -5,12 +5,13 @@
     background-color: $color-white;
     box-shadow: $box-shadow;
     overflow: hidden;
+    opacity: 1;
 
     cursor: -webkit-grab;
     transition: all .3s ease-out;
 
     &.u-touched {
-        box-shadow: $box-shadow-press;
+        opacity: .5;
         cursor: -webkit-grabbing;
     }
 
@@ -28,11 +29,15 @@
     &__author-avatar {
         position: relative;
         width: 15%;
+        height: 0;
+        padding-top: 15%;
         border: solid 1px $color-light-grey;
         border-radius: 50%;
         overflow: hidden;
 
         .message__image {
+            position: absolute;
+            top:0;
             transform: scale(1.15);
         }
     }

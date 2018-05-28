@@ -14,19 +14,24 @@ class InfiniteMessenger {
             messages: [],
             messagesUI: [],
             pageToken: null,
-            loading: false
+            loading: true
         }
 
         // Check if config is set up properly
         isPresent([
             { name: '[Config Endpoint]', property: this.config.endpoint },
             { name: '[Config Limit]', property: this.config.limit },
-            { name: '[Config Root]', property: this.config.root }
+            { name: '[Config Root]', property: this.config.root },
+            { name: '[Config Loader]', property: this.config.loader }
         ])
 
         // Get, set and render first page of messages
         getPayload(`${this.config.endpoint}?limit=${this.config.limit}`)
-            .then(this.setMessages.bind(this))
+            .then(response => {
+                this.setMessages(response);
+                this.setState({ loading : false });
+                this.showOrHideLoader();
+            })
             .then(this.render.bind(this));
 
         this.addNewPage = this.addNewPage.bind(this);
@@ -35,7 +40,7 @@ class InfiniteMessenger {
     // Sets state of container
     setState(newState) {
         this.state = { ...this.state, ...newState };
-        console.log('[New State]', this.state);
+        //console.log('[New State]', this.state);
     }
 
     // Set state messages
@@ -61,11 +66,13 @@ class InfiniteMessenger {
     addNewPage(){
         if(!this.state.loading){
             this.setState({ loading : true });
+            this.showOrHideLoader();
             
             this.getNextPage(this.state.pageToken)
                 .then(response => {
                     this.config.root.appendChild(this.addMessageBlock(response));
                     this.setState({ loading : false });
+                    this.showOrHideLoader();
                 });
         }
     }
@@ -85,11 +92,21 @@ class InfiniteMessenger {
         return section;
     }
 
+    showOrHideLoader() {
+        if(!this.state.loading){
+            this.config.loader.classList.add('u-disappear')
+        } else {
+            this.config.loader.classList.remove('u-disappear')
+        }
+    }
+
     render() {
         const touch = new Touch({
             root: this.config.root,
             selector: '.message'
         });
+
+        console.log(touch);
         
         this.config.root.appendChild(this.addMessageBlock(this.state.messages));
         watchWindowBottom(this.addNewPage);
