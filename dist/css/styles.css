@@ -108,6 +108,18 @@ body {
     padding-top: 15%;
     border-radius: 50%;
     overflow: hidden; }
+    @media (max-width: 22.5em) {
+      .message__author-avatar {
+        width: 40px;
+        padding-top: 40px; } }
+    @media (min-width: 43.75em) {
+      .message__author-avatar {
+        width: 100px;
+        padding-top: 100px; } }
+    @media (min-width: 62.5em) {
+      .message__author-avatar {
+        width: 130px;
+        padding-top: 130px; } }
     .message__author-avatar .message__image {
       position: absolute;
       top: 0;

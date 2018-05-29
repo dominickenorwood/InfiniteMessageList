@@ -93,6 +93,11 @@ class InfiniteMessenger {
     }
 
     render() {
+        /*
+        Config Requirements:
+            root: Element that will listen to touch events,
+            selector: Class of elements that will slide when touched
+        */
         const touch = new Touch({
             root: this.config.root,
             selector: '.message'

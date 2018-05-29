@@ -38,6 +38,21 @@
         border-radius: 50%;
         overflow: hidden;
 
+        @include max-width-query(360px){
+            width: 40px;
+            padding-top: 40px;
+        }
+
+        @include min-width-query(700px){
+            width: 100px;
+            padding-top: 100px;
+        }
+
+        @include min-width-query(1000px){
+            width: 130px;
+            padding-top: 130px;
+        }
+
         .message__image {
             position: absolute;
             top:0;
