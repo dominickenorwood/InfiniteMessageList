@@ -7,6 +7,11 @@
     overflow: hidden;
     opacity: 1;
 
+    @include min-width-query(600px){
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
     cursor: -webkit-grab;
     transition: all .3s ease-out;
 
@@ -16,7 +21,6 @@
     }
 
     & > * {
-        backface-visibility: hidden;
         user-select: none;
     }
     
@@ -48,16 +52,42 @@
     &__author-name {
         font-size: 1.4rem;
         font-weight: 500;
+
+        @include min-width-query(500px){
+            font-size: 2rem
+        }
+
+        @include min-width-query(600px){
+            font-size: 2.5rem;
+        }
+
+        @include min-width-query(1000px){
+            font-size: 3.5rem;
+        }
     }
+
+    
 
     &__post-time {
         font-size: 1.2rem;
         margin-top: .5rem;
+
+        @include min-width-query(600px){
+            font-size: 1.8rem;
+        }
     }
 
     &__body {
         padding-top: 1.5rem;
         font-size: 1.4rem;
+
+        @include min-width-query(600px){
+            font-size: 2rem;
+        }
+
+        @include min-width-query(700px){
+            font-size: 2.2rem;
+        }
     }
 
 }

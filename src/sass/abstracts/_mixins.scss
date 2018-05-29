@@ -11,5 +11,5 @@
 }
     
 @mixin min-width-query($breakpoint){
-    @media (min-width: (($breakpoint / $default-browser-font-size) * 1em)) { @content };
+    @media (min-width: (($breakpoint / $default-browser-font-size) * 1em)) { @content }
 }

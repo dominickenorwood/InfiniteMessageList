@@ -1,2 +1,2 @@
-export const MESSAGES_ORIGIN = 'http://message-list.appspot.com';
-export const MESSAGES_ENDPOINT = 'http://message-list.appspot.com/messages';
+export const MESSAGES_ORIGIN = 'https://message-list.appspot.com';
+export const MESSAGES_ENDPOINT = 'https://message-list.appspot.com/messages';

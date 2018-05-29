@@ -1,8 +1,16 @@
 .app-messenger {
     padding-top: 7.3rem;
     overflow: hidden;
+
+    @include min-width-query(600px){
+        padding-top: 8rem;
+    }
     
     &__block {
         padding: 0 1.5rem;
+
+        @include min-width-query(600px){
+            padding: 0 2rem;
+        }
     }
 }
