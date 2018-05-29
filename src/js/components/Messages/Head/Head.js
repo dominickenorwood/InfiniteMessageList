@@ -1,9 +1,8 @@
 import * as keys from '../../API/Keys';
+import { formatTime } from '../../Helpers/Helpers';
 
 const messageHead = author => {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemer', 'December'];
-    const date = new Date(author.updated);
-    const updated = `${months[date.getMonth() - 1]}, ${date.getMonth()} ${date.getFullYear()}`;
+    const formattedDate = formatTime(author.updated)
 
     return (
         `<header class="message__header">
@@ -12,7 +11,7 @@ const messageHead = author => {
             </figure>
             <div class="message__author">
                 <h3 class="message__author-name">${ author.name }</h3>
-                <time class="message__post-time">${ updated }</time>
+                <time class="message__post-time">${ formattedDate.month } ${ formattedDate.day}, ${formattedDate.year} ~ ${formattedDate.time}</time>
             </div>
         </header>`
     )
