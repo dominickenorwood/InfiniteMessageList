@@ -12,8 +12,8 @@ export const getClosest = (elem, selector) => {
 export const formatTime = timestamp => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemer', 'December'];
     const now = new Date(Date.parse(timestamp));
-    const date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
-    const time = [ now.getHours(), now.getMinutes()];
+    const date = [now.getMonth() + 1, now.getDate(), now.getFullYear()];
+    const time = [now.getHours(), now.getMinutes()];
     const suffix = ( time[0] < 12 ) ? "AM" : "PM";
 
     time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;

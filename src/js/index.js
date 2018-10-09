@@ -1,7 +1,7 @@
 import '../sass/index.scss';
 
 import InfiniteMessenger from './containers/InfiniteMessenger/InfiniteMessenger';
-import * as keys from './components/API/Keys';
+import * as keys from './api/Keys';
 
 /*
 Config Requirements:
@@ -10,7 +10,7 @@ Config Requirements:
     root: DOM element the app will bootstrap to,
     loader: DOM element that acts as app loading message
 */
-const messenger = new InfiniteMessenger({
+const messenger = new InfiniteMessenger({ // eslint-disable-line no-unused-vars
     endpoint: keys.MESSAGES_ENDPOINT,
     limit: 20,
     root: document.getElementById('app-messenger'),

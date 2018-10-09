@@ -1,7 +1,7 @@
 {
-  "name": "workflow-with-testing",
+  "name": "infinite-messenger-prototype",
   "version": "1.0.0",
-  "description": "This is a testing enviroment to fit in unit, assertion and UI testing.",
+  "description": "Prototype for an infinite messaging service.",
   "main": "app.js",
   "scripts": {
     "clean": "rimraf dist",

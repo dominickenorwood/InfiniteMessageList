@@ -10,12 +10,13 @@ const watchWindowBottom = dispatch => {
     setInterval(() => {
         if( scrolling ) {
             scrolling = false;
-            windowRelativeBottom = Math.floor(document.documentElement.getBoundingClientRect().bottom);
-            windowElementClientHeight = Math.floor(document.documentElement.clientHeight);
+            windowRelativeBottom = Math.floor(document.documentElement.getBoundingClientRect().bottom); // Document Height
+            windowElementClientHeight = Math.floor(document.documentElement.clientHeight); // Viewport Height
             
             if(windowRelativeBottom / 2 > windowElementClientHeight) {
                 return;
             }
+
             return dispatch();
         }
     }, 250)

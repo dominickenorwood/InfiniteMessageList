@@ -1,7 +1,7 @@
-import { getPayload } from '../../components/API/Payload';
-import { isPresent } from '../../components/ErrorHandlers/ErrorHandlers';
+import { getPayload } from '../../api/Payload';
+import { isPresent } from '../../handlers/errors/ErrorHandlers';
 import messageCollection from '../../components/Messages/Messages';
-import watchWindowBottom from '../../components/EventScroll/EventScroll';
+import watchWindowBottom from '../../handlers/events/EventScroll';
 import Touch from '../Touch/Touch';
 
 class InfiniteMessenger {
@@ -64,7 +64,7 @@ class InfiniteMessenger {
             
             this.getNextPage(this.state.pageToken)
                 .then(response => {
-                    this.config.root.appendChild(this.addMessageBlock(response));
+                    this.config.root.append(this.addMessageBlock(response));
                     this.setState({ loading : false });
                     this.showOrHideLoader();
                 });
@@ -98,12 +98,12 @@ class InfiniteMessenger {
             root: Element that will listen to touch events,
             selector: Class of elements that will slide when touched
         */
-        const touch = new Touch({
+        const touch = new Touch({ // eslint-disable-line no-unused-vars
             root: this.config.root,
             selector: '.message'
         });
         
-        this.config.root.appendChild(this.addMessageBlock(this.state.messages));
+        this.config.root.append(this.addMessageBlock(this.state.messages));
         watchWindowBottom(this.addNewPage);
     }
 }

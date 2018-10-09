@@ -1,0 +1,42 @@
+Infinitely Scrolling Message List
+---------------------------------------------
+Build a prototype that shows a potentially very long list of messages. 
+The platform is web but users should be able to scroll through messages smoothly 
+on a mobile device. Messages can be loaded via the API specified below. 
+
+Requirements:
+●	The header should be fixed with messages that scroll underneath.
+●	Users should be able to swipe a message horizontally offscreen to dismiss it.
+●	Messages should load automatically so that a user scrolling slowly should 
+    never see the bottom of the list.
+●	The prototype should work well even after many messages have been loaded.
+
+API
+-----------------------------------------------------
+- Request
+    ●  GET http://message-list.appspot.com/messages
+
+    Optional Parameters
+    ●	limit: Specifies the number of results to fetch, up to 100.
+    ●	pageToken: A token provided by the previous response to fetch the next page.
+
+- Response
+    ●  JSON structure of the form:
+
+        {
+            'count': number of messages,
+            'messages': {
+                'id': integer message ID,
+                'author': {
+                    'name': name of the message author,
+                    'photoUrl': photo of the message author,
+                },
+                'updated': UTC timestamp of the messages creation time,
+                'content': message content,
+            },
+            'pageToken': a continuation token for the next page of messages
+        }
+
+- To get the next page, use the continuation token:
+    ●  GET /messages?pageToken=page token provided by the previous response
+

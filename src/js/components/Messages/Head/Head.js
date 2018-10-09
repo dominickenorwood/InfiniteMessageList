@@ -1,5 +1,5 @@
-import * as keys from '../../API/Keys';
-import { formatTime } from '../../Helpers/Helpers';
+import * as keys from '../../../api/Keys';
+import { formatTime } from '../../../helpers/Helpers';
 
 const messageHead = author => {
     const formattedDate = formatTime(author.updated)

@@ -1,5 +1,5 @@
-import { getClosest } from '../../components/Helpers/Helpers';
-import { isPresent } from '../../components/ErrorHandlers/ErrorHandlers';
+import { getClosest } from '../../helpers/Helpers';
+import { isPresent } from '../../handlers/errors/ErrorHandlers';
 
 class Touch {
     constructor(config) {
@@ -50,26 +50,23 @@ class Touch {
         }
     }
 
-    end(event) {
+    end() {
         if(this.state.targetElement) {
             const elementLeft = Math.floor(this.state.targetElement.getBoundingClientRect().left);
             const elementRight = Math.floor(this.state.targetElement.getBoundingClientRect().right)
-            let removeElement = false;
             this.state.targetElement.classList.remove('u-touched');
 
             if(elementLeft > Math.floor(elementRight / 4)) {
-                if(!removeElement){
-                    removeElement = true;
-                    this.state.targetElement.style.transform = `translate3d(100vw,0,0)`;
-                    this.state.targetElement.style.height = `${this.state.targetElement.offsetHeight}px`
-                    this.state.targetElement.addEventListener('transitionend', this.removeTarget);
-                }
+                this.state.targetElement.style.transform = `translate3d(100vw,0,0)`;
+                this.state.targetElement.style.height = `${this.state.targetElement.offsetHeight}px`
+                this.state.targetElement.addEventListener('transitionend', this.removeTarget);
             } else {
                 this.state.targetElement.style.transform = `translate3d(0,0,0)`;
             }
         }
 
     }
+    
     removeTarget(event) {
         if(event.propertyName === 'transform'){
             this.state.targetElement.style.height = '0';
