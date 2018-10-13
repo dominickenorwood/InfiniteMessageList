@@ -2,19 +2,19 @@ import { getClosest } from '../../helpers/Helpers';
 import { isPresent } from '../../handlers/errors/ErrorHandlers';
 
 class Touch {
-    constructor(config) {
-        this.config = config;
+    constructor(config = {}) {
+        isPresent([
+            { name: '[Config Object]', property: Object.keys(config).length },
+            { name: '[Touch Container Node]', property: config.hasOwnProperty('root') },
+            { name: '[Touch Element Identifier]', property: config.hasOwnProperty('selector') }
+        ]);
 
+        this.config = config;
         this.state = {
             elementX: 0,
             touchStart: 0,
             targetElement: null
         }
-
-        isPresent([
-            { name: '[Config Root]', property: this.config.root },
-            { name: '[Config Selector]', property: this.config.selector }
-        ])
 
         this.start = this.start.bind(this);
         this.move = this.move.bind(this);

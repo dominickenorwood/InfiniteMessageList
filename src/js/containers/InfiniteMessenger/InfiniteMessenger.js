@@ -5,22 +5,22 @@ import watchWindowBottom from '../../handlers/events/EventScroll';
 import Touch from '../Touch/Touch';
 
 class InfiniteMessenger {
-    constructor(config) {
-        this.config = config;
+    constructor(config = {}) {
+        isPresent([
+            { name: '[Config Object]', property: Object.keys(config).length },
+            { name: '[API Endpoint]', property: config.hasOwnProperty('endpoint') },
+            { name: '[Payload Limit]', property: config.hasOwnProperty('limit') },
+            { name: '[Bootstrap Root Node]', property: config.hasOwnProperty('root') },
+            { name: '[Loading Node]', property: config.hasOwnProperty('loader') }
+        ]);
 
+        this.config = config;
         this.state = {
             messages: [],
             messagesUI: [],
             pageToken: null,
             loading: true
         }
-
-        isPresent([
-            { name: '[Config Endpoint]', property: this.config.endpoint },
-            { name: '[Config Limit]', property: this.config.limit },
-            { name: '[Config Root]', property: this.config.root },
-            { name: '[Config Loader]', property: this.config.loader }
-        ])
 
         getPayload(`${this.config.endpoint}?limit=${this.config.limit}`)
             .then(response => {
@@ -35,7 +35,6 @@ class InfiniteMessenger {
 
     setState(newState) {
         this.state = { ...this.state, ...newState };
-        //console.log('[New State]', this.state);
     }
 
     setMessages(data) {
