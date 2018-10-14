@@ -26,7 +26,6 @@ class Touch {
 
     setState(newState) {
         this.state = { ...this.state, ...newState };
-        //console.log('[New State]', this.state);
     }
 
     start(event) {
@@ -34,8 +33,7 @@ class Touch {
 
         if(this.state.targetElement) {
             
-            this.setState({ 
-                move: 0, 
+            this.setState({  
                 elementX: this.state.targetElement.getBoundingClientRect().left,
                 touchStart:  Math.floor(event.touches[0].pageX)
             });
@@ -46,7 +44,7 @@ class Touch {
     move(event) {
         if(this.state.targetElement) {
             const slide = Math.floor(event.touches[0].pageX) - this.state.touchStart;
-            this.state.targetElement.style.transform = `translate3d(${slide + 10}px,0,0)`;
+            this.state.targetElement.style.transform = `translate3d( ${slide + 10 }px,0,0)`;
         }
     }
 
@@ -58,10 +56,11 @@ class Touch {
 
             if(elementLeft > Math.floor(elementRight / 4)) {
                 this.state.targetElement.style.transform = `translate3d(100vw,0,0)`;
-                this.state.targetElement.style.height = `${this.state.targetElement.offsetHeight}px`
+                this.state.targetElement.style.height = `${ this.state.targetElement.offsetHeight }px`
                 this.state.targetElement.addEventListener('transitionend', this.removeTarget);
             } else {
                 this.state.targetElement.style.transform = `translate3d(0,0,0)`;
+                this.setState({ targetElement : null });
             }
         }
 
@@ -76,6 +75,7 @@ class Touch {
 
         if(event.propertyName === 'height') {
             this.state.targetElement.remove();
+            this.setState({ targetElement : null });
         }
     }
 

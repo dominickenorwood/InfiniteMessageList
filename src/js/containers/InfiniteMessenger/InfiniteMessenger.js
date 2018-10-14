@@ -25,8 +25,6 @@ class InfiniteMessenger {
         getPayload(`${this.config.endpoint}?limit=${this.config.limit}`)
             .then(response => {
                 this.setMessages(response);
-                this.setState({ loading : false });
-                this.showOrHideLoader();
             })
             .then(this.render.bind(this));
 
@@ -103,6 +101,9 @@ class InfiniteMessenger {
         });
         
         this.config.root.append(this.addMessageBlock(this.state.messages));
+        this.setState({ loading : false });
+        this.showOrHideLoader();
+
         watchWindowBottom(this.addNewPage);
     }
 }
