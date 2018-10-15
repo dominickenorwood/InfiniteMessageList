@@ -11,7 +11,6 @@ class Touch {
 
         this.config = config;
         this.state = {
-            elementX: 0,
             touchStart: 0,
             targetElement: null
         }
@@ -30,13 +29,10 @@ class Touch {
 
     start(event) {
         this.setState({ targetElement : getClosest(event.target, this.config.selector) });
-
+        
         if(this.state.targetElement) {
             
-            this.setState({  
-                elementX: this.state.targetElement.getBoundingClientRect().left,
-                touchStart:  Math.floor(event.touches[0].pageX)
-            });
+            this.setState({ touchStart:  Math.floor(event.touches[0].pageX) });
             this.state.targetElement.classList.add('u-touched');
         }
     }
@@ -60,7 +56,6 @@ class Touch {
                 this.state.targetElement.addEventListener('transitionend', this.removeTarget);
             } else {
                 this.state.targetElement.style.transform = `translate3d(0,0,0)`;
-                this.setState({ targetElement : null });
             }
         }
 
@@ -75,7 +70,6 @@ class Touch {
 
         if(event.propertyName === 'height') {
             this.state.targetElement.remove();
-            this.setState({ targetElement : null });
         }
     }
 
